@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Feliz Dia dos Namorados</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: linear-gradient(to bottom, #0d0d0d, #4b0019, #502020); /* preto → vinho → bordô */
+      font-family: 'Roboto', sans-serif;
+      color: #ffe6f0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 40px;
+      text-shadow: 2px 2px 8px #3d164d;
+      animation: fadeInUp 2s ease-out forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    a.heart-link {
+      text-decoration: none;
+    }
+
+    .heart {
+      width: 100px;
+      height: 90px;
+      background: linear-gradient(45deg, #800208, #800208, #c41212); 
+      position: relative;
+      transform: rotate(-45deg);
+      transition: transform 0.4s ease;
+      box-shadow: 0 0 20px rgb(252, 39, 39);
+      cursor: pointer;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      width: 100px;
+      height: 90px;
+      background: linear-gradient(45deg, #800208, #800208, #800000);
+      border-radius: 50%;
+      position: absolute;
+    }
+
+    .heart::before {
+      top: -50px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: 50px;
+      top: 0;
+    }
+
+    .heart:hover {
+      transform: rotate(-45deg) scale(1.2) translateY(-10px);
+    }
+  </style>
+</head>
+<body>
+  <h1>Feliz Dia dos Namorados 💖</h1>
+
+  <!-- Coração clicável -->
+  <a href="surpresa.html" class="heart-link">
+    <div class="heart"></div>
+  </a>
+</body>
+</html>

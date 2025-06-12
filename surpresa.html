@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Surpresa 💘</title>
+  <link rel="icon" href="imagens/coracao.png" />
+  <a href="home12.html" class="heart-link">
+    <div class="heart"></div>
+  </a>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Roboto:wght@400;700&display=swap');
+
+    /* Reset e base */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 0 20px 40px;
+      min-height: 100vh;
+      background: #1b0a0a; /* preto bem escuro */
+      font-family: 'Roboto', sans-serif;
+      color: #8b1e3f; /* bordo escuro */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-y: auto;
+    }
+
+    .top-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+      margin: 40px 0 60px;
+      width: 100%;
+      max-width: 450px;
+    }
+
+    #contador {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3.6rem;
+      font-weight: 700;
+      padding: 28px 60px;
+      background: #4b162a; /* vinho escuro */
+      border-radius: 50px;
+      color: #f3e6e8; /* rosa claro quase branco */
+      text-shadow:
+        0 0 8px #8b1e3f;
+      box-shadow:
+        0 0 20px #7b1429,
+        inset 0 0 25px #7b1429;
+      cursor: default;
+      user-select: none;
+      letter-spacing: 1.3px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+    #contador:hover {
+      transform: scale(1.1) rotate(-1.5deg);
+      box-shadow:
+        0 0 35px #a02a4a,
+        inset 0 0 40px #a02a4a;
+      text-shadow:
+        0 0 14px #a02a4a;
+    }
+
+    .spotify-container {
+      width: 100%;
+      border-radius: 25px;
+      box-shadow:
+        0 10px 30px rgba(139, 30, 63, 0.7);
+      overflow: hidden;
+      user-select: none;
+      transition: box-shadow 0.4s ease, transform 0.4s ease;
+      position: relative;
+      background: #4b162a;
+    }
+    .spotify-container:hover {
+      box-shadow:
+        0 14px 45px rgba(160, 42, 74, 0.9);
+      transform: scale(1.07);
+    }
+
+    iframe {
+      border-radius: 25px;
+      border: none;
+      width: 100%;
+      height: 90px;
+      filter: drop-shadow(0 0 8px #a02a4a);
+      display: block;
+    }
+
+    .voltar-btn {
+      margin-top: 12px;
+      background: linear-gradient(135deg, #8b1e3f, #4b162a);
+      color: #f3e6e8;
+      border: none;
+      padding: 15px 36px;
+      border-radius: 40px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow:
+        0 0 15px rgba(139, 30, 63, 0.7);
+      transition: background 0.4s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      user-select: none;
+      position: relative;
+      text-shadow: 0 0 5px #3d1524;
+      font-family: 'Roboto', sans-serif;
+      letter-spacing: 1.1px;
+    }
+    .voltar-btn:hover {
+      background: linear-gradient(135deg, #a02a4a, #6b2437);
+      transform: scale(1.12) rotate(-3deg);
+      box-shadow:
+        0 0 35px rgba(160, 42, 74, 0.9);
+    }
+    .voltar-btn svg {
+      width: 24px;
+      height: 24px;
+      fill: #f3e6e8;
+      transition: transform 0.3s ease;
+    }
+    .voltar-btn:hover svg {
+      transform: translateX(-6px);
+    }
+
+    .gallery {
+      display: flex;
+      gap: 85px;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 1080px;
+      margin-top: 50px;
+      user-select: none;
+      padding-bottom: 30px;
+    }
+
+    .photo {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 25px;
+      cursor: pointer;
+      box-shadow:
+        0 6px 25px rgba(139, 30, 63, 0.85);
+      transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.55s ease, filter 0.55s ease;
+      will-change: transform, box-shadow, filter;
+      position: relative;
+      border: 2px solid transparent;
+      user-select: none;
+    }
+    .gallery .photo:nth-child(even):hover {
+      transform: scale(1.18) translateY(-8px) rotate(3deg);
+      border-color: #a02a4a;
+      box-shadow:
+        0 12px 40px rgba(160, 42, 74, 0.95);
+      filter: brightness(1.15) contrast(1.1);
+      z-index: 15;
+    }
+    .gallery .photo:nth-child(odd):hover {
+      transform: scale(1.18) translateY(-8px) rotate(-3deg);
+      border-color: #a02a4a;
+      box-shadow:
+        0 12px 40px rgba(160, 42, 74, 0.95);
+      filter: brightness(1.15) contrast(1.1);
+      z-index: 15;
+    }
+
+    /* Modal */
+    #modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(27, 10, 10, 0.95);
+      backdrop-filter: blur(6px);
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 1100;
+      cursor: pointer;
+      padding: 30px 20px;
+      animation: fadeInModal 0.4s ease forwards;
+    }
+    #modal.show {
+      display: flex;
+    }
+    #modal img {
+      max-width: 85vw;
+      max-height: 75vh;
+      border-radius: 30px;
+      box-shadow:
+        0 0 40px #a02a4a;
+      user-select: none;
+      margin-bottom: 25px;
+      filter: drop-shadow(0 0 16px #a02a4a);
+      transition: transform 0.5s ease;
+    }
+    #modal img:hover {
+      transform: scale(1.05);
+    }
+
+    /* Texto do modal com animação de digitação */
+    #modal-text {
+      color: #f3e6e8;
+      font-size: 1.5rem;
+      font-family: 'Great Vibes', cursive;
+      text-align: center;
+      max-width: 90vw;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 3px solid #a02a4a;
+      letter-spacing: 1.6px;
+      user-select: none;
+      min-height: 42px;
+      text-shadow: 0 0 10px #8b1e3f;
+    }
+
+    @keyframes fadeInModal {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Responsivo */
+    @media (max-width: 900px) {
+      .photo {
+        width: 140px;
+        height: 140px;
+      }
+      .gallery {
+        gap: 60px;
+      }
+      #contador {
+        font-size: 2.8rem;
+        padding: 20px 40px;
+      }
+    }
+    @media (max-width: 600px) {
+      .gallery {
+        gap: 40px;
+      }
+      .photo {
+        width: 120px;
+        height: 120px;
+      }
+      #contador {
+        font-size: 2.2rem;
+        padding: 15px 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-container">
+    <div id="contador" aria-live="polite" aria-atomic="true" aria-label="Contador de dias juntos">Calculando tempo juntos...</div>
+
+    <div class="spotify-container" aria-label="Player Spotify">
+      <iframe
+        src="https://open.spotify.com/embed/track/3QI5bIozef0HZ1kJnA2RdT?utm_source=generator"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy"
+        title="Spotify player"
+      ></iframe>
+    </div>
+
+    <button class="voltar-btn" onclick="window.history.back()" aria-label="Voltar para a página anterior">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 18l-6-6 6-6" /></svg> Voltar
+    </button>
+  </div>
+
+  <div class="gallery" role="list" aria-label="Galeria de fotos">
+    <img src="imagens/f1 (1).jpeg" alt="Foto 1" class="photo" role="listitem" />
+    <img src="imagens/f1 (2).jpeg" alt="Foto 2" class="photo" role="listitem" />
+    <img src="imagens/f1 (3).jpeg" alt="Foto 3" class="photo" role="listitem" />
+    <img src="imagens/f1 (4).jpeg" alt="Foto 4" class="photo" role="listitem" />
+    <img src="imagens/f1 (5).jpeg" alt="Foto 5" class="photo" role="listitem" />
+    <img src="imagens/f1 (6).jpeg" alt="Foto 6" class="photo" role="listitem" />
+    <img src="imagens/f1 (7).jpeg" alt="Foto 7" class="photo" role="listitem" />
+    <img src="imagens/f1 (8).jpeg" alt="Foto 8" class="photo" role="listitem" />
+    <img src="imagens/f1 (9).jpeg" alt="Foto 9" class="photo" role="listitem" />
+    <img src="imagens/f1 (10).jpeg" alt="Foto 10" class="photo" role="listitem" />
+    <img src="imagens/f1 (11).jpeg" alt="Foto 11" class="photo" role="listitem" />
+    <img src="imagens/f1 (12).jpeg" alt="Foto 12" class="photo" role="listitem" />
+    <img src="imagens/f1 (13).jpeg" alt="Foto 13" class="photo" role="listitem" />
+    <img src="imagens/f1 (14).jpeg" alt="Foto 14" class="photo" role="listitem" />
+    <img src="imagens/f1 (15).jpeg" alt="Foto 15" class="photo" role="listitem" />
+    <img src="imagens/f1 (16).jpeg" alt="Foto 16" class="photo" role="listitem" />
+    <img src="imagens/f1 (17).jpeg" alt="Foto 17" class="photo" role="listitem" />
+    <img src="imagens/f1 (18).jpeg" alt="Foto 18" class="photo" role="listitem" />
+  </div>
+
+  <div id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-text" tabindex="-1">
+    <img src="" alt="" id="modal-img" />
+    <p id="modal-text"></p>
+  </div>
+
+  <script>
+    // Contador dias juntos desde 21/12/2023
+    const contador = document.getElementById('contador');
+    const startDate = new Date(2023, 11, 21); // dezembro é mês 11 (0-based)
+    function updateCounter() {
+      const now = new Date();
+      const diff = now - startDate;
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      contador.textContent = `Estamos juntos há ${days} dias ❤️`;
+    }
+    updateCounter();
+    setInterval(updateCounter, 60000);
+
+    // Modal e galeria
+    const photos = document.querySelectorAll('.photo');
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modal-img');
+    const modalText = document.getElementById('modal-text');
+
+    const messages = [
+      "Eu te amo muito minha esquilinha",
+      "Lembre que sempre estou ao seu lado",
+      "Você é a motivo de eu sorrir todos os dias",
+      "Você é a minha lua e as minhas estrelas",
+      "Esse é segundo ano que comemoramos juntos",
+      "Amo muito você,Espero que goste dessa surpresa",
+      "É ao seu lado que quero passar o resto da minha vida",
+      'Você é a razão do meu sorriso',
+      'Razão do meu viver',
+      'Você é a minha felicidade',
+      'Queria que você soubesse o quanto você é especial para mim',
+      'Quero ter filhos com você',
+      'Você é a minha melhor amiga',
+      'Você me completa 💘',
+      'Eu amo muito seu jeito de ser',
+      'Eu amo sua risada',
+      'Eu espero que você saiba o quanto você é importante para mim',
+      'Você é a minha razão de viver',
+    ];
+
+    photos.forEach((photo, idx) => {
+      photo.addEventListener('click', () => {
+        modalImg.src = photo.src;
+        modalImg.alt = photo.alt;
+        modal.classList.add('show');
+        modalText.textContent = '';
+        let message = messages[idx % messages.length];
+        typeWriter(message, 0);
+        modal.focus();
+      });
+    });
+
+    modal.addEventListener('click', () => {
+      modal.classList.remove('show');
+      modalImg.src = '';
+      modalImg.alt = '';
+    });
+
+    // Função digitação
+    function typeWriter(text, i) {
+      if (i < text.length) {
+        modalText.textContent += text.charAt(i);
+        setTimeout(() => typeWriter(text, i + 1), 70);
+      }
+    }
+  </script>
+
+</body>
+</html>
