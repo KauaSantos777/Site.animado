@@ -1,2 +1,2 @@
 # Site.animado
-Um site feito no vscode com html e css
+Site com conhecimentos básicos em JavaScript,HTML5 e Css
